@@ -1,5 +1,3 @@
-# This is an example feature definition file
-
 from datetime import timedelta
 
 import pandas as pd
@@ -13,6 +11,7 @@ from feast import (
     Project,
     PushSource,
     RequestSource,
+    ValueType
 )
 from feast.on_demand_feature_view import on_demand_feature_view
 from feast.types import Float32, Float64, Int64
@@ -23,7 +22,9 @@ project = Project(name="my_project", description="A project for driver statistic
 
 # Define an entity for the driver. You can think of an entity as a primary key used to
 # fetch features.
-driver = Entity(name="driver", join_keys=["driver_id"])
+driver = Entity(name="driver", 
+                join_keys=["driver_id"],
+                value_type=ValueType.INT64)
 
 # Read data from parquet files. Parquet is convenient for local development mode. For
 # production, you can use your favorite DWH, such as BigQuery. See Feast documentation
